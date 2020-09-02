@@ -3,6 +3,7 @@ const cors = require("cors");
 const volleyBall = require("volleyball");
 const app = express();
 const auth = require("./auth");
+require("dotenv").config();
 
 app.use(cors());
 app.use(volleyBall);
