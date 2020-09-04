@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import signup from "../../api";
+import { signup } from "../../api";
 
 const SignUp = (props) => {
   const [username, setUsername] = useState("");
@@ -17,8 +17,11 @@ const SignUp = (props) => {
       };
 
       signup(user)
-        .then(({ user }) => {
+        .then((user) => {
           console.log("user: ", user);
+          if (user) {
+            props.history.push("/signin");
+          }
         })
         .catch((error) => {
           console.log("error: ", error);
