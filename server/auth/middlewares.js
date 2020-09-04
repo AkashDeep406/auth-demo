@@ -22,4 +22,14 @@ function checkToken(req, res, next) {
   }
 }
 
-module.exports = { checkToken };
+function isLoggedIn(req, res, next) {
+  if (req.user) {
+    next();
+  } else {
+    const error = new Error("🚧UnAuthorized🚧");
+    res.status(401);
+    next(error);
+  }
+}
+
+module.exports = { checkToken, isLoggedIn };

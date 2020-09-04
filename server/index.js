@@ -4,6 +4,8 @@ const volleyBall = require("volleyball");
 const app = express();
 const auth = require("./auth");
 const middlewares = require("./auth/middlewares");
+const notes = require("./api/notes");
+
 require("dotenv").config();
 
 app.use(cors());
@@ -11,6 +13,7 @@ app.use(volleyBall);
 app.use(express.json());
 
 app.use(middlewares.checkToken);
+
 app.get("/", (req, res) => {
   res.json({
     message: "Hello World!",
@@ -19,6 +22,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth", auth);
+app.use("/api/v1/notes", middlewares.isLoggedIn, notes);
 
 function notFound(req, res, next) {
   res.status(404);
