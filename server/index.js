@@ -3,15 +3,18 @@ const cors = require("cors");
 const volleyBall = require("volleyball");
 const app = express();
 const auth = require("./auth");
+const middlewares = require("./auth/middlewares");
 require("dotenv").config();
 
 app.use(cors());
 app.use(volleyBall);
 app.use(express.json());
 
+app.use(middlewares.checkToken);
 app.get("/", (req, res) => {
   res.json({
     message: "Hello World!",
+    user: req.user,
   });
 });
 
