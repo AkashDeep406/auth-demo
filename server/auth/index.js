@@ -34,7 +34,7 @@ const errorStatus422 = (res, next, errorMessage) => {
   next(error);
 };
 
-const signToken = (payload, res, next) => {
+const userToken = (payload, res, next) => {
   jwt.sign(
     payload,
     process.env.TOKEN_SECRET,
@@ -76,12 +76,11 @@ router.post("/signup", (req, res, next) => {
             const newUser = {
               username: req.body.username,
               password: hashedPassword,
-              successful: true,
             };
 
             //insert user into db
             users.insert(newUser).then((user) => {
-              res.json({ user });
+              userToken(user, res, next);
             });
           });
         }
@@ -112,7 +111,7 @@ router.post("/signin", (req, res, next) => {
                 username: user.username,
               };
 
-              signToken(payload, res, next);
+              userToken(payload, res, next);
             }
           });
         } else {
