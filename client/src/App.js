@@ -29,7 +29,7 @@ export default function App() {
         </nav>
         <Switch>
           <Route exact path="/" component={Home}>
-            {getToken ? (
+            {localStorage.getItem("token") ? (
               <Redirect to="/dashboard" />
             ) : (
               <Route path={"/"} component={Home} />
@@ -37,7 +37,7 @@ export default function App() {
           </Route>
 
           <Route path="/signup">
-            {getToken ? (
+            {localStorage.getItem("token") ? (
               <Redirect to="/dashboard" />
             ) : (
               <Route path={"/signup"} component={SignUp} />
@@ -45,7 +45,7 @@ export default function App() {
           </Route>
 
           <Route path={"/signin"}>
-            {getToken ? (
+            {localStorage.getItem("token") ? (
               <Redirect to="/dashboard" />
             ) : (
               <Route path={"/signin"} component={SignIn} />
@@ -65,7 +65,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       {...rest}
       exact
       render={(props) =>
-        getToken ? (
+        localStorage.getItem("token") ? (
           <Component {...props} />
         ) : (
           <Redirect
@@ -78,8 +78,4 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       }
     />
   );
-};
-
-const getToken = () => {
-  return localStorage.getItem("toke");
 };
