@@ -43,7 +43,7 @@ export const signin = async (body) => {
 
 export const addNotes = async (body) => {
   try {
-    const response = await fetch(`${BASE_URL}/api/v1/notes`, {
+    const response = await fetch(`${BASE_URL}api/v1/notes`, {
       method: "POST",
       body: JSON.stringify(body),
       headers: {

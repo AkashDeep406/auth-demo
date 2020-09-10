@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { addNotes } from "../../api";
 
 const Dashboard = (props) => {
   const [title, setTitle] = useState("");
@@ -13,10 +14,12 @@ const Dashboard = (props) => {
   const onSubmitNote = (event) => {
     event.preventDefault();
     console.log("onSubmit event: ", event.target.value);
-    const note = {
+    const notes = {
       title: title,
       note: note,
     };
+
+    addNotes(notes);
   };
 
   return (

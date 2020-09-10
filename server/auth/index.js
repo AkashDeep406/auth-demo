@@ -56,7 +56,6 @@ const userToken = (payload, res, next) => {
 /******USER SIGNUP*****/
 router.post("/signup", (req, res, next) => {
   const result = schema.validate(req.body);
-  console.log("result: ", result);
   if (result) {
     //checks if user exists in the db
     users
